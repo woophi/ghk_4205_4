@@ -94,16 +94,16 @@ const secondSection = [
   },
 ];
 
-const PRICE_PER_MONTH = 390;
-const PRICE_PER_MONTH_ANNUAL = 280;
+const PRICE_PER_WEEK = 88;
+const PRICE_PER_WEEK_ANNUAL = 70;
 
 export const App = () => {
   const [loading, setLoading] = useState(false);
   const [thxShow, setThx] = useState(LS.getItem(LSKeys.ShowThx, false));
-  const [selectedBtn, setSelectedBtn] = useState(PRICE_PER_MONTH);
+  const [selectedBtn, setSelectedBtn] = useState(PRICE_PER_WEEK);
 
   const submit = () => {
-    if (selectedBtn === PRICE_PER_MONTH) {
+    if (selectedBtn === PRICE_PER_WEEK) {
       window.gtag('event', 'activate_one_4205_var4');
     } else {
       window.gtag('event', 'activate_one_4205_year_var4');
@@ -185,19 +185,19 @@ export const App = () => {
       <div className={appSt.bottomBtn}>
         <div className={appSt.switcher}>
           <button
-            className={appSt.btnSwitch({ nonactive: selectedBtn !== PRICE_PER_MONTH })}
-            onClick={() => setSelectedBtn(PRICE_PER_MONTH)}
+            className={appSt.btnSwitch({ nonactive: selectedBtn !== PRICE_PER_WEEK })}
+            onClick={() => setSelectedBtn(PRICE_PER_WEEK)}
           >
             <Typography.Text view="primary-small" weight="medium">
-              {PRICE_PER_MONTH}₽ в месяц
+              {PRICE_PER_WEEK}₽ в неделю
             </Typography.Text>
           </button>
           <button
-            className={appSt.btnSwitch({ nonactive: selectedBtn !== PRICE_PER_MONTH_ANNUAL })}
-            onClick={() => setSelectedBtn(PRICE_PER_MONTH_ANNUAL)}
+            className={appSt.btnSwitch({ nonactive: selectedBtn !== PRICE_PER_WEEK_ANNUAL })}
+            onClick={() => setSelectedBtn(PRICE_PER_WEEK_ANNUAL)}
           >
             <Typography.Text tag="p" defaultMargins={false} view="primary-small" weight="medium">
-              {PRICE_PER_MONTH_ANNUAL}₽ в месяц
+              {PRICE_PER_WEEK_ANNUAL}₽ в неделю
             </Typography.Text>
             <Typography.Text view="secondary-small">Оплата за год</Typography.Text>
           </button>
@@ -207,7 +207,7 @@ export const App = () => {
           </div>
         </div>
         <ButtonMobile loading={loading} block view="primary" onClick={submit}>
-          Подключить за {selectedBtn === PRICE_PER_MONTH ? `${selectedBtn} ₽ в месяц` : `${selectedBtn * 12} ₽ в год`}
+          Подключить за {selectedBtn === PRICE_PER_WEEK ? `${selectedBtn} ₽ в неделю` : `${(selectedBtn / 7) * 365} ₽ в год`}
         </ButtonMobile>
       </div>
     </>
